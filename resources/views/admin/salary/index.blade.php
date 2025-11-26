@@ -12,41 +12,112 @@ Salary List
 
                 <div class="card card-cyan">
                     <div class="card-header">
-                        <h3 class="card-title">Salary List</h3>
-                        <a href="{{ route('admin.salary.create') }}" class="btn btn-success float-right"><i class="fa fa-plus"></i> Add Salary</a>
+                        <h3 class="card-title">
+                            {{ session('locale') == 'ar' 
+                            ? \App\Helpers\TranslateHelper::toArabic('Salary List') 
+                            : 'Salary List' }}
+                        </h3>
+                        <a href="{{ route('admin.salary.create') }}" class="btn btn-success float-right"><i class="fa fa-plus"></i>
+                        {{ session('locale') == 'ar' 
+                        ? \App\Helpers\TranslateHelper::toArabic('Add Salary') 
+                        : 'Add Salary' }}
+                    </a>
                     </div>
 
                     <div class="card-body">
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>Sl</th>
-                                    <th>Employee</th>
-                                    <th>Customer</th>
-                                    <th>Department</th>
-                                    <th>Salary</th>
-                                    <th>Attendance</th>
-                                    <th>Over Time</th>
-                                    <th>Advanced</th>
-                                    <th>Paid</th>
-                                    <th>Salary Date</th>
-                                    <th>Action</th>
+                                    <th>
+                                        {{ session('locale') == 'ar' ? \App\Helpers\TranslateHelper::toArabic('Sl') : 'Sl' }}
+                                    </th>
+
+                                    <th>
+                                        {{ session('locale') == 'ar' ? \App\Helpers\TranslateHelper::toArabic('Employee') : 'Employee' }}
+                                    </th>
+
+                                    <th>
+                                        {{ session('locale') == 'ar' ? \App\Helpers\TranslateHelper::toArabic('Customer') : 'Customer' }}
+                                    </th>
+
+                                    <th>
+                                        {{ session('locale') == 'ar' ? \App\Helpers\TranslateHelper::toArabic('Department') : 'Department' }}
+                                    </th>
+
+                                    <th>
+                                        {{ session('locale') == 'ar' ? \App\Helpers\TranslateHelper::toArabic('Salary') : 'Salary' }}
+                                    </th>
+
+                                    <th>
+                                        {{ session('locale') == 'ar' ? \App\Helpers\TranslateHelper::toArabic('Attendance') : 'Attendance' }}
+                                    </th>
+
+                                    <th>
+                                        {{ session('locale') == 'ar' ? \App\Helpers\TranslateHelper::toArabic('Over Time') : 'Over Time' }}
+                                    </th>
+
+                                    <th>
+                                        {{ session('locale') == 'ar' ? \App\Helpers\TranslateHelper::toArabic('Advanced') : 'Advanced' }}
+                                    </th>
+
+                                    <th>
+                                        {{ session('locale') == 'ar' ? \App\Helpers\TranslateHelper::toArabic('Paid') : 'Paid' }}
+                                    </th>
+
+                                    <th>
+                                        {{ session('locale') == 'ar' ? \App\Helpers\TranslateHelper::toArabic('Salary Date') : 'Salary Date' }}
+                                    </th>
+
+                                    <th>
+                                        {{ session('locale') == 'ar' ? \App\Helpers\TranslateHelper::toArabic('Action') : 'Action' }}
+                                    </th>
+
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($data as $item)
                                
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->user->name }}</td>
-                                    <td>{{ $item->customer->name }}</td>
-                                    <td>{{ $item->user->department->name }}</td>
-                                    <td>{{ $item->user->basic_salary }}</td>
-                                    <td>{{ $item->attendance }}(days)</td>
-                                    <td>{{ $item->over_time }}</td>
-                                    <td>{{ $item->advanced }}</td>
-                                    <td>{{ $item->paid }}</td>
-                                    <td>{{ $item->salary_date }}</td>
+                                    <td>
+                                        {{ session('locale') == 'ar' ? \App\Helpers\TranslateHelper::toArabic($loop->iteration) : $loop->iteration }}
+                                    </td>
+
+                                    <td>
+                                        {{ session('locale') == 'ar' ? \App\Helpers\TranslateHelper::toArabic($item->user->name) : $item->user->name }}
+                                    </td>
+
+                                    <td>
+                                        {{ session('locale') == 'ar' ? \App\Helpers\TranslateHelper::toArabic($item->customer->name) : $item->customer->name }}
+                                    </td>
+
+                                    <td>
+                                        {{ session('locale') == 'ar' ? \App\Helpers\TranslateHelper::toArabic($item->user->department->name) : $item->user->department->name }}
+                                    </td>
+
+                                    <td>
+                                        {{ session('locale') == 'ar' ? \App\Helpers\TranslateHelper::toArabic($item->user->basic_salary) : $item->user->basic_salary }}
+                                    </td>
+
+                                    <td>
+                                        {{ session('locale') == 'ar' ? \App\Helpers\TranslateHelper::toArabic($item->attendance) : $item->attendance }}(days)
+                                    </td>
+
+                                    <td>
+                                        {{ session('locale') == 'ar' ? \App\Helpers\TranslateHelper::toArabic($item->over_time) : $item->over_time }}
+                                    </td>
+
+                                    <td>
+                                        {{ session('locale') == 'ar' ? \App\Helpers\TranslateHelper::toArabic($item->advanced) : $item->advanced }}
+                                    </td>
+
+                                    <td>
+                                        {{ session('locale') == 'ar' ? \App\Helpers\TranslateHelper::toArabic($item->paid) : $item->paid }}
+                                    </td>
+
+                                    <td>
+                                        {{ session('locale') == 'ar' ? \App\Helpers\TranslateHelper::toArabic($item->salary_date) : $item->salary_date }}
+                                    </td>
+
                                  
                                
                                     <td class="text-center">

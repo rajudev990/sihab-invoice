@@ -11,12 +11,27 @@ Dashboard
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Dashboard</h1>
+                <h1 class="m-0">
+                    {{ session('locale', 'en') == 'ar' 
+                            ? \App\Helpers\TranslateHelper::toArabic('Dashboard') 
+                            : 'Dashboard' 
+                            }}
+                </h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-                    <li class="breadcrumb-item active">Dashboard</li>
+                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">
+                        {{ session('locale', 'en') == 'ar' 
+                            ? \App\Helpers\TranslateHelper::toArabic('Home') 
+                            : 'Home' 
+                            }}
+                    </a></li>
+                    <li class="breadcrumb-item active">
+                        {{ session('locale', 'en') == 'ar' 
+                            ? \App\Helpers\TranslateHelper::toArabic('Dashboard') 
+                            : 'Dashboard' 
+                            }}
+                  </li>
                 </ol>
             </div>
         </div>
@@ -35,7 +50,9 @@ Dashboard
                 <div class="small-box bg-dark">
                     <div class="inner">
                         <h3>{{ $employee }}</h3>
-                        <p>Employee</p>
+                        <p>
+                            {{ session('locale') == 'ar' ? \App\Helpers\TranslateHelper::toArabic('Employee') : 'Employee' }}
+                        </p>
                     </div>
                     <div class="icon">
                         <i class="fas fa-user-tie"></i>
@@ -48,7 +65,9 @@ Dashboard
                 <div class="small-box bg-info">
                     <div class="inner">
                         <h3>{{ $customers }}</h3>
-                        <p>Customer</p>
+                        <p>
+                            {{ session('locale') == 'ar' ? \App\Helpers\TranslateHelper::toArabic('Customer') : 'Customer' }}
+                        </p>
                     </div>
                     <div class="icon">
                         <i class="fas fa-users"></i>
@@ -56,28 +75,32 @@ Dashboard
                 </div>
             </div>
 
-            <!-- Product -->
+            <!-- Department -->
             <div class="col-lg-3 col-6">
                 <div class="small-box bg-success">
                     <div class="inner">
                         <h3>{{ $department }}</h3>
-                        <p>Department</p>
+                        <p>
+                            {{ session('locale') == 'ar' ? \App\Helpers\TranslateHelper::toArabic('Department') : 'Department' }}
+                        </p>
                     </div>
                     <div class="icon">
-                        <i class="fas fa-box-open"></i>
+                        <i class="fas fa-building"></i>
                     </div>
                 </div>
             </div>
 
-            <!-- Orders -->
+            <!-- Total Payable -->
             <div class="col-lg-3 col-6">
                 <div class="small-box bg-gradient-indigo">
                     <div class="inner">
                         <h3 class="text-light">{{ $total }}</h3>
-                        <p class="text-light">Total Payable</p>
+                        <p class="text-light">
+                             {{ session('locale') == 'ar' ? \App\Helpers\TranslateHelper::toArabic('Total Payable') : 'Total Payable' }}
+                        </p>
                     </div>
                     <div class="icon">
-                        <i class="fas fa-shopping-cart"></i>
+                        <i class="fas fa-wallet"></i>
                     </div>
                 </div>
             </div>
@@ -87,7 +110,9 @@ Dashboard
         <div class="row">
             <div class="col-12 card">
                 <div class="card-header text-right" style="background: white !important;">
-                    <a href="{{ route('admin.salary.report.pdf') }}" class="btn btn-primary"><i class="fa fa-print"></i> Print</a>
+                    <a href="{{ route('admin.salary.report.pdf') }}" class="btn btn-primary"><i class="fa fa-print"></i> 
+                     {{ session('locale') == 'ar' ? \App\Helpers\TranslateHelper::toArabic('Print') : 'Print' }}
+                </a>
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered table-striped">

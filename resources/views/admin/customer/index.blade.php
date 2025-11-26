@@ -12,31 +12,93 @@ Customer List
 
                 <div class="card card-cyan">
                     <div class="card-header">
-                        <h3 class="card-title">Customer List</h3>
-                        <a href="{{ route('admin.customers.create') }}" class="btn btn-success float-right"><i class="fa fa-plus"></i> Add Customer</a>
+                        <h3 class="card-title">
+                             {{ session('locale') == 'ar'
+                                ? \App\Helpers\TranslateHelper::toArabic('Customer List')
+                                : 'Customer List' }}
+                        </h3>
+                        <a href="{{ route('admin.customers.create') }}" class="btn btn-success float-right"><i class="fa fa-plus"></i>
+                        {{ session('locale') == 'ar'
+                        ? \App\Helpers\TranslateHelper::toArabic(' Add Customer')
+                        : ' Add Customer' }}
+                    </a>
                     </div>
 
                     <div class="card-body">
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>Sl</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Image</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
+                                    <th>
+                                        {{ session('locale') == 'ar' 
+                                            ? \App\Helpers\TranslateHelper::toArabic('Sl') 
+                                            : 'Sl' }}
+                                    </th>
+
+                                    <th>
+                                        {{ session('locale') == 'ar' 
+                                            ? \App\Helpers\TranslateHelper::toArabic('Name') 
+                                            : 'Name' }}
+                                    </th>
+
+                                    <th>
+                                        {{ session('locale') == 'ar' 
+                                            ? \App\Helpers\TranslateHelper::toArabic('Email') 
+                                            : 'Email' }}
+                                    </th>
+
+                                    <th>
+                                        {{ session('locale') == 'ar' 
+                                            ? \App\Helpers\TranslateHelper::toArabic('Phone') 
+                                            : 'Phone' }}
+                                    </th>
+
+                                    <th>
+                                        {{ session('locale') == 'ar' 
+                                            ? \App\Helpers\TranslateHelper::toArabic('Image') 
+                                            : 'Image' }}
+                                    </th>
+
+                                    <th>
+                                        {{ session('locale') == 'ar' 
+                                            ? \App\Helpers\TranslateHelper::toArabic('Status') 
+                                            : 'Status' }}
+                                    </th>
+
+                                    <th>
+                                        {{ session('locale') == 'ar' 
+                                            ? \App\Helpers\TranslateHelper::toArabic('Action') 
+                                            : 'Action' }}
+                                    </th>
+
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($data as $item)
                                
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->name }}</td>
-                                    <td>{{ $item->email }}</td>
-                                    <td>{{ $item->phone }}</td>
+                                    <td>
+                                        {{ session('locale') == 'ar'
+                                            ? \App\Helpers\TranslateHelper::toArabic($loop->iteration)
+                                            : $loop->iteration }}
+                                    </td>
+
+                                    <td>
+                                        {{ session('locale') == 'ar'
+                                            ? \App\Helpers\TranslateHelper::toArabic($item->name)
+                                            : $item->name }}
+                                    </td>
+
+                                    <td>
+                                        {{ session('locale') == 'ar'
+                                            ? \App\Helpers\TranslateHelper::toArabic($item->email)
+                                            : $item->email }}
+                                    </td>
+
+                                    <td>
+                                        {{ session('locale') == 'ar'
+                                            ? \App\Helpers\TranslateHelper::toArabic($item->phone)
+                                            : $item->phone }}
+                                    </td>
                                    <td>
                                         @if($item->image)
                                        <img src="{{Storage::url($item->image)}}" width="80px" height="80px">
@@ -44,9 +106,17 @@ Customer List
                                     </td>
                                    <td>
                                         @if($item->status == 1)
-                                            <span class="badge bg-success">Active</span>
+                                            <span class="badge bg-success">
+                                                {{ session('locale') == 'ar' 
+                                            ? \App\Helpers\TranslateHelper::toArabic('Active') 
+                                            : 'Active' }}
+                                            </span>
                                         @else
-                                            <span class="badge bg-danger">Deactive</span>
+                                            <span class="badge bg-danger">
+                                                {{ session('locale') == 'ar' 
+                                            ? \App\Helpers\TranslateHelper::toArabic('Deactive') 
+                                            : 'Deactive' }}
+                                            </span>
                                         @endif
                                     </td>
                                     <td class="text-center">
