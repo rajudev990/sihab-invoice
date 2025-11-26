@@ -21,12 +21,10 @@ Employe List
                             <thead>
                                 <tr>
                                     <th>Sl</th>
-                                    <th>Staff ID</th>
-                                    <th>Department</th>
-                                    <th>Position</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Status</th>
+                                    <th>Staff</th>
+                                    <th>Employee</th>
+                                    <th>Basic Salary</th>
+                                    <th>Country</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -35,17 +33,26 @@ Employe List
                                
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>#{{ $item->staff_id }}</td>
-                                    <td>{{ $item->department?->name }}</td>
-                                    <td>{{ $item->position?->name }}</td>
-                                    <td>{{ $item->name }}</td>
-                                    <td>{{ $item->email }}</td>
+                                    <td>
+                                        
+                                        <p class="mb-0"><b>ID :</b>#{{ $item->staff_id }}</p>
+                                        <p class="mb-0"><b>Department :</b>{{ $item->department?->name }}</p>
+                                        <p class="mb-0"><b>Position :</b>{{ $item->position?->name }}</p>
+
+                                    </td>
+     
+                                    <td>
+                                        <p class="mb-0"><b>Name :</b>{{ $item->name }}</p>
+                                        <p class="mb-0"><b>Email :</b>{{ $item->email }}</p>
+                                        <p class="mb-0"><b>Phone :</b>{{ $item->phone }}</p>
+                                    </td>
+                                    <td>
+                                        <b class="text-success">{{ $item->basic_salary }}</b>
+                                    </td>
                                    <td>
-                                        @if($item->status == 1)
-                                            <span class="badge bg-success">Active</span>
-                                        @else
-                                            <span class="badge bg-danger">Deactive</span>
-                                        @endif
+                            
+                                    <span class="badge bg-success">{{ $item->country}}</span>
+                                      
                                     </td>
                                     <td class="text-center">
                                         <a href="{{ route('admin.staff.edit', $item->id) }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
