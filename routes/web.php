@@ -1,6 +1,5 @@
 <?php
 
-
 use App\Http\Controllers\Admin\AdminProfileController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\CustomerController;
@@ -38,8 +37,6 @@ Route::get('/', [WebsiteController::class, 'home'])->name('index');
 Auth::routes(['verify' => true]);
 
 
-
-
 Route::middleware(['auth', 'no.admin', 'verified'])->group(function () {
     Route::get('/home',[HomeController::class,'index'])->name('home');
 
@@ -61,7 +58,6 @@ Route::middleware(['auth', 'no.admin', 'verified'])->group(function () {
 
 
 });
-
 
 
 // Admin Auth
