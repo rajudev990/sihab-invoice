@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Helpers\ImageHelper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -33,90 +33,55 @@ class HomeController extends Controller
 
     public function settings()
     {
-        return view('settings');
+        return view('auth.settings');
     }
-    public function profile()
+    public function changePassword()
     {
-        $data = Auth::user();
-        return view('profile', compact('data'));
+        return view('auth.change-password');
     }
-    public function profileEdit()
+    public function updateSettings(Request $request)
     {
-        $data = Auth::user();
-        return view('profile-edit', compact('data'));
-    }
+        $admin = auth('web')->user();
 
-    public function passwordEdit()
-    {
-
-        return view('password-edit');
-    }
-
-    public function update(Request $request)
-    {
-        $user = Auth::user();
-
-        $validated = $request->validate([
+        $request->validate([
             'name' => 'required|string|max:255',
-            'dob' => 'required|date',
-            'username' => 'required|string|max:255|unique:users,username,' . $user->id,
-            'email' => 'required|email|max:255|unique:users,email,' . $user->id,
-            'phone' => [
-                'nullable',
-                'regex:/^\d{11}$/',
-                'unique:users,phone,' . $user->id,
-            ],
-            'gender' => 'nullable|string|max:10',
-            'address' => 'nullable|string|max:255',
-            'bio' => 'nullable|string|max:1000',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
-        ], [
-            'phone.regex' => 'ফোন নাম্বারটি অবশ্যই ১১ সংখ্যার হতে হবে।',
-            'phone.unique' => 'এই ফোন নাম্বারটি ইতোমধ্যে ব্যবহৃত হয়েছে।',
+            'email' => 'required|email|unique:users,email,' . $admin->id,
         ]);
 
-        // Handle image upload
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
+        $image = $request->hasFile('image') ? ImageHelper::uploadImage($request->file('image')) : null;
 
-            // Delete old image if exists
-            if ($user->image && Storage::disk('public')->exists($user->image)) {
-                Storage::disk('public')->delete($user->image);
-            }
-
-            // Generate unique filename
-            $filename = 'users/' . Str::uuid() . '.' . $image->getClientOriginalExtension();
-
-            // Store image in public disk
-            Storage::disk('public')->put($filename, file_get_contents($image));
-
-            // Set validated image path
-            $validated['image'] = $filename;
+        if ($request->hasFile('image') && $admin->image) {
+            Storage::disk('public')->delete($admin->image);
         }
 
-        // Update user data
-        $user->update($validated);
+        $admin->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'image' =>  $image,
+        ]);
 
-        return redirect()->back()->with('success', 'প্রোফাইল সফলভাবে আপডেট হয়েছে!');
+        return back()->with('success', 'Profile updated successfully.');
     }
 
     public function updatePassword(Request $request)
     {
+        $admin = auth('web')->user();
+
         $request->validate([
-            'current_password' => ['required', 'current_password'],
-            'new_password' => ['required', 'min:6', 'confirmed', 'different:current_password'],
-        ], [
-            'current_password.current_password' => 'বর্তমান পাসওয়ার্ড সঠিক নয়।',
-            'new_password.confirmed' => 'নতুন পাসওয়ার্ড এবং নিশ্চিত পাসওয়ার্ড মিলে না।',
-            'new_password.different' => 'নতুন পাসওয়ার্ডটি অবশ্যই বর্তমান পাসওয়ার্ড থেকে ভিন্ন হতে হবে।',
+            'current_password' => 'required',
+            'new_password' => 'required|min:6|confirmed',
         ]);
 
-        // Update password
-        $user = Auth::user();
-        $user->password = Hash::make($request->new_password);
-        $user->save();
+        if (!\Hash::check($request->current_password, $admin->password)) {
+            return back()->withErrors(['current_password' => 'Current password does not match.']);
+        }
 
-        return back()->with('success', 'পাসওয়ার্ড সফলভাবে পরিবর্তন করা হয়েছে।');
+        $admin->update([
+            'password' => \Hash::make($request->new_password),
+        ]);
+
+        return back()->with('success', 'Password changed successfully.');
     }
 
 }
