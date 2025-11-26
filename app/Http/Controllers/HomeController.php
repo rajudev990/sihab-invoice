@@ -59,6 +59,18 @@ class HomeController extends Controller
             'email' => $request->email,
             'phone' => $request->phone,
             'image' =>  $image,
+            'staff_id' => $request->staff_id,
+            'address' => $request->address,
+            'dob' => $request->dob,
+            'country' => $request->country,
+            'nationality' => $request->nationality,
+            'level' => $request->level,
+            'join_date' => $request->join_date,
+            'iqan' => $request->iqan,
+            'state' => $request->state,
+            'city' => $request->city,
+            'postal_code' => $request->postal_code,
+            
         ]);
 
         return back()->with('success', 'Profile updated successfully.');

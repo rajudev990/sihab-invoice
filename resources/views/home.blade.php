@@ -49,10 +49,8 @@ Dashboard
             <div class="col-lg-3 col-6">
                 <div class="small-box bg-dark">
                     <div class="inner">
-                        <h3></h3>
-                        <p>
-                           
-                        </p>
+                        <h3>100</h3>
+                        <p>Department</p>
                     </div>
                     <div class="icon">
                         <i class="fas fa-user-tie"></i>
@@ -64,10 +62,8 @@ Dashboard
             <div class="col-lg-3 col-6">
                 <div class="small-box bg-info">
                     <div class="inner">
-                        <h3></h3>
-                        <p>
-                            
-                        </p>
+                        <h3>100</h3>
+                        <p>Position</p>
                     </div>
                     <div class="icon">
                         <i class="fas fa-users"></i>
@@ -79,10 +75,8 @@ Dashboard
             <div class="col-lg-3 col-6">
                 <div class="small-box bg-success">
                     <div class="inner">
-                        <h3></h3>
-                        <p>
-                            
-                        </p>
+                       <h3>2500</h3>
+                        <p>Basic Salary</p>
                     </div>
                     <div class="icon">
                         <i class="fas fa-building"></i>
@@ -94,10 +88,8 @@ Dashboard
             <div class="col-lg-3 col-6">
                 <div class="small-box bg-gradient-indigo">
                     <div class="inner">
-                        <h3 class="text-light"></h3>
-                        <p class="text-light">
-                             
-                        </p>
+                        <h3>1</h3>
+                        <p>Level</p>
                     </div>
                     <div class="icon">
                         <i class="fas fa-wallet"></i>
