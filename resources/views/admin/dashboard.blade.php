@@ -12,25 +12,16 @@ Dashboard
         <div class="row mb-2">
             <div class="col-sm-6">
                 <h1 class="m-0">
-                    {{ session('locale', 'en') == 'ar' 
-                            ? \App\Helpers\TranslateHelper::toArabic('Dashboard') 
-                            : 'Dashboard' 
-                            }}
+                    Dashboard
                 </h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">
-                        {{ session('locale', 'en') == 'ar' 
-                            ? \App\Helpers\TranslateHelper::toArabic('Home') 
-                            : 'Home' 
-                            }}
+                        Home
                     </a></li>
                     <li class="breadcrumb-item active">
-                        {{ session('locale', 'en') == 'ar' 
-                            ? \App\Helpers\TranslateHelper::toArabic('Dashboard') 
-                            : 'Dashboard' 
-                            }}
+                        Dashboard
                   </li>
                 </ol>
             </div>
@@ -51,7 +42,7 @@ Dashboard
                     <div class="inner">
                         <h3>{{ $employee }}</h3>
                         <p>
-                            {{ session('locale') == 'ar' ? \App\Helpers\TranslateHelper::toArabic('Employee') : 'Employee' }}
+                            Employee
                         </p>
                     </div>
                     <div class="icon">
@@ -66,7 +57,7 @@ Dashboard
                     <div class="inner">
                         <h3>{{ $customers }}</h3>
                         <p>
-                            {{ session('locale') == 'ar' ? \App\Helpers\TranslateHelper::toArabic('Customer') : 'Customer' }}
+                            Customer
                         </p>
                     </div>
                     <div class="icon">
@@ -81,7 +72,7 @@ Dashboard
                     <div class="inner">
                         <h3>{{ $department }}</h3>
                         <p>
-                            {{ session('locale') == 'ar' ? \App\Helpers\TranslateHelper::toArabic('Department') : 'Department' }}
+                            Department
                         </p>
                     </div>
                     <div class="icon">
@@ -96,7 +87,7 @@ Dashboard
                     <div class="inner">
                         <h3 class="text-light">{{ $total }}</h3>
                         <p class="text-light">
-                             {{ session('locale') == 'ar' ? \App\Helpers\TranslateHelper::toArabic('Total Payable') : 'Total Payable' }}
+                             Total Payable
                         </p>
                     </div>
                     <div class="icon">
@@ -110,8 +101,8 @@ Dashboard
         <div class="row">
             <div class="col-12 card">
                 <div class="card-header text-right" style="background: white !important;">
-                    <a href="{{ route('admin.salary.report.pdf') }}" class="btn btn-primary"><i class="fa fa-print"></i> 
-                     {{ session('locale') == 'ar' ? \App\Helpers\TranslateHelper::toArabic('Print') : 'Print' }}
+                    <a href="{{ route('admin.salary.report.pdf') }}" target="_blank" class="btn btn-primary"><i class="fa fa-print"></i> 
+                     Print
                 </a>
                 </div>
                 <div class="card-body">
@@ -157,10 +148,41 @@ Dashboard
 
                         </tbody>
                         <tfoot>
+                            @php
+                                $grand_total = $grand_total ?? 0;
+                                $vat_percent = $setting->vat_tax ?? 0;
+                                $vat_amount = ($grand_total * $vat_percent) / 100;
+                                $final_total = $grand_total + $vat_amount;
+                            @endphp
+
                             <tr>
-                                <th colspan="3" class="text-right">{{ session('locale', 'en') == 'ar' ? \App\Helpers\TranslateHelper::toArabic('Grand Total') : 'Grand Total' }}:</th>
-                                <th>{{ number_format($grand_total,2) }}</th>
+                                <th colspan="3" class="text-right">
+                                    {{ session('locale', 'en') == 'ar' ? \App\Helpers\TranslateHelper::toArabic('Grand Total') : 'Grand Total' }}:
+                                </th>
+                                <th>{{ number_format($grand_total, 2) }}</th>
                             </tr>
+
+                            <tr>
+                                <th colspan="3" class="text-right">
+                                    {{ session('locale', 'en') == 'ar' ? \App\Helpers\TranslateHelper::toArabic('VAT') : 'VAT' }} (%):
+                                </th>
+                                <th>{{ number_format($vat_percent, 2) }}%</th>
+                            </tr>
+
+                            <tr>
+                                <th colspan="3" class="text-right">
+                                    {{ session('locale', 'en') == 'ar' ? \App\Helpers\TranslateHelper::toArabic('VAT Amount') : 'VAT Amount' }}:
+                                </th>
+                                <th>{{ number_format($vat_amount, 2) }}</th>
+                            </tr>
+
+                            <tr>
+                                <th colspan="3" class="text-right">
+                                    {{ session('locale', 'en') == 'ar' ? \App\Helpers\TranslateHelper::toArabic('Total') : 'Total' }}:
+                                </th>
+                                <th>{{ number_format($final_total, 2) }}</th>
+                            </tr>
+
                         </tfoot>
                     </table>
                 </div>

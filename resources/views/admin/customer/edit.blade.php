@@ -40,6 +40,21 @@ Update Customer
                                 <input type="text" name="phone" value="{{$data->phone}}" class="form-control">
                             </div>
 
+                            <div class="form-group col-lg-6">
+                                <label>Company ID</label>
+                                <input type="text" name="company_id" value="{{$data->company_id }}" class="form-control" placeholder="2442424">
+                            </div>
+
+                             <div class="form-group col-lg-6">
+                                <label>Trn Number</label>
+                                <input type="text" name="trn_no" value="{{$data->trn_no }}" class="form-control" placeholder="444414">
+                            </div>
+
+                             <div class="form-group col-lg-6">
+                                <label>Vat Number</label>
+                                <input type="text" name="vat_no" value="{{$data->vat_no }}" class="form-control" placeholder="44444">
+                            </div>
+
                             <!-- Address -->
                             <div class="form-group col-lg-6">
                                 <label>Address</label>
@@ -47,19 +62,19 @@ Update Customer
                             </div>
 
                             <!-- Country -->
-                            <div class="form-group col-lg-4">
+                            <div class="form-group col-lg-6">
                                 <label>Country</label>
                                 <input type="text" name="country" value="{{$data->country}}" class="form-control" >
                             </div>
 
                             <!-- State -->
-                            <div class="form-group col-lg-4">
+                            <div class="form-group col-lg-6">
                                 <label>State</label>
                                 <input type="text" name="state" value="{{$data->state}}" class="form-control">
                             </div>
 
                             <!-- City -->
-                            <div class="form-group col-lg-4">
+                            <div class="form-group col-lg-6">
                                 <label>City</label>
                                 <input type="text" name="city" value="{{$data->city}}" class="form-control">
                             </div>

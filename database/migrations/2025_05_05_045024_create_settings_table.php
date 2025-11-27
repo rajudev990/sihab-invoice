@@ -18,6 +18,9 @@ return new class extends Migration
             $table->string('footer_logo')->nullable();
             $table->string('favicon')->nullable();
             $table->string('company_name')->nullable();
+            $table->string('company_id')->nullable();
+            $table->string('trn_no')->nullable();
+            $table->string('vat_no')->nullable();
             $table->string('address')->nullable();
             $table->string('phone_one')->nullable();
             $table->string('phone_two')->nullable();
@@ -35,11 +38,10 @@ return new class extends Migration
             $table->longText('meta_keyword')->nullable();
             $table->string('meta_image')->nullable();
             $table->string('bank_name')->nullable();
-            $table->string('bank_phone')->nullable();
-            $table->string('bank_email')->nullable();
-            $table->string('bank_address')->nullable();
-            $table->string('bank_logo')->nullable();
-            $table->string('established_year')->nullable();
+            $table->string('acccount_name')->nullable();
+            $table->string('iban_number')->nullable();
+            $table->string('terms_condition')->nullable();
+            $table->longText('terms_description')->nullable();
             $table->string('status')->default(1);
             $table->timestamps();
         });

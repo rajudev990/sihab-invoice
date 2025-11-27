@@ -40,6 +40,21 @@ Add Customer
                                 <input type="text" name="phone" value="{{ old('phone') }}" class="form-control" placeholder="Phone">
                             </div>
 
+                             <div class="form-group col-lg-6">
+                                <label>Company ID</label>
+                                <input type="text" name="company_id" value="{{ old('company_id') }}" class="form-control" placeholder="2442424">
+                            </div>
+
+                             <div class="form-group col-lg-6">
+                                <label>Trn Number</label>
+                                <input type="text" name="trn_no" value="{{ old('trn_no') }}" class="form-control" placeholder="444414">
+                            </div>
+
+                             <div class="form-group col-lg-6">
+                                <label>Vat Number</label>
+                                <input type="text" name="vat_no" value="{{ old('vat_no') }}" class="form-control" placeholder="44444">
+                            </div>
+
                             <!-- Address -->
                             <div class="form-group col-lg-6">
                                 <label>Address</label>
@@ -47,19 +62,19 @@ Add Customer
                             </div>
 
                             <!-- Country -->
-                            <div class="form-group col-lg-4">
+                            <div class="form-group col-lg-6">
                                 <label>Country</label>
                                 <input type="text" name="country" value="{{ old('country') }}" class="form-control" placeholder="Country">
                             </div>
 
                             <!-- State -->
-                            <div class="form-group col-lg-4">
+                            <div class="form-group col-lg-6">
                                 <label>State</label>
                                 <input type="text" name="state" value="{{ old('state') }}" class="form-control" placeholder="State">
                             </div>
 
                             <!-- City -->
-                            <div class="form-group col-lg-4">
+                            <div class="form-group col-lg-6">
                                 <label>City</label>
                                 <input type="text" name="city" value="{{ old('city') }}" class="form-control" placeholder="City">
                             </div>

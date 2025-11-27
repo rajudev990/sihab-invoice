@@ -52,28 +52,57 @@
 
 
 
-                            <!-- Staff ID -->
+                          
+                           <div class="form-group col-lg-6">
+                                <label>Salary Month</label>
+                                <select class="form-control select2" name="month" id="month" required>
+                                    <option value="">Select Month</option>
+                                    <option value="January">January</option>
+                                    <option value="February">February</option>
+                                    <option value="March">March</option>
+                                    <option value="April">April</option>
+                                    <option value="May">May</option>
+                                    <option value="June">June</option>
+                                    <option value="July">July</option>
+                                    <option value="August">August</option>
+                                    <option value="September">September</option>
+                                    <option value="October">October</option>
+                                    <option value="November">November</option>
+                                    <option value="December">December</option>
+                                </select>
+                            </div>
+
+
                             <div class="form-group col-lg-6">
                                 <label>Attendance(days)</label>
                                 <input type="text" id="attendance" name="attendance" value="{{ old('attendance') }}" class="form-control" placeholder="30" required>
                             </div>
                             <div class="form-group col-lg-6">
-                                <label>Over Time(Amount)</label>
-                                <input type="text" id="over_time" name="over_time" value="{{ old('over_time') }}" class="form-control" placeholder="2000" required>
+                                <label>Over Time(hours)</label>
+                                <input type="text" id="over_time" name="over_time" value="{{ old('over_time','0') }}" class="form-control" placeholder="10" required>
                             </div>
                             <div class="form-group col-lg-6">
                                 <label>Advanced(Amount)</label>
-                                <input type="text" id="advanced" name="advanced" value="{{ old('advanced') }}" class="form-control" placeholder="" required>
+                                <input type="text" id="advanced" name="advanced" value="{{ old('advanced','0.00') }}" class="form-control" placeholder="" required>
                             </div>
                             <div class="form-group col-lg-6">
                                 <label>Paid(Amount)</label>
                                 <input type="text" id="paid" name="paid" value="{{ old('paid') }}" class="form-control" placeholder="" required>
                             </div>
-                            <div class="form-group col-lg-6">
+
+                             <div class="form-group col-lg-6">
                                 <label>Salary Date</label>
                                 <input type="date" name="salary_date" value="{{ old('salary_date') }}" class="form-control" required>
                             </div>
 
+                            <div class="form-group col-lg-6">
+                                <label>Salary Status</label>
+                                <select class="form-control" name="status" id="status" required>
+                                    <option value="0">Pending</option>
+                                    <option value="1">Paid</option>
+                                </select>
+                            </div>
+                            
 
                         </div>
 
@@ -97,14 +126,35 @@
 <script>
 $(document).ready(function() {
 
-    // Employee change এ Basic salary show
+    // Month wise total days
+    const monthDays = {
+        "January": 31,
+        "February": 28,
+        "March": 31,
+        "April": 30,
+        "May": 31,
+        "June": 30,
+        "July": 31,
+        "August": 31,
+        "September": 30,
+        "October": 31,
+        "November": 30,
+        "December": 31
+    };
+
+    // Salary show when employee selected
     $('#user_id').on('change', function () {
         var salary = $(this).find(':selected').data('salary');
         $('#basic_salary').val(salary ? salary : '');
         calculateSalary();
     });
 
-    // যেকোনো field change হলে salary re-calc
+    // Month change → update days & calculate
+    $('#month').on('change', function () {
+        calculateSalary();
+    });
+
+    // Recalculate when attendance, overtime, advanced changed
     $('#attendance, #over_time, #advanced').on('input', function () {
         calculateSalary();
     });
@@ -113,25 +163,34 @@ $(document).ready(function() {
 
         var basic_salary = parseFloat($('#basic_salary').val()) || 0;
         var attendance = parseFloat($('#attendance').val()) || 0;
-        var over_time = parseFloat($('#over_time').val()) || 0;
+        var over_time_hours = parseFloat($('#over_time').val()) || 0;
         var advanced = parseFloat($('#advanced').val()) || 0;
 
-        // Per day salary
-        var per_day = basic_salary / 30;
+        // Selected month
+        var month = $('#month').val();
+        var total_days = monthDays[month] || 30;
+
+        // Per day salary (basic salary / days of selected month)
+        var per_day_salary = basic_salary / total_days;
 
         // Attendance salary
-        var attendance_salary = per_day * attendance;
+        var attendance_salary = per_day_salary * attendance;
 
-        // Final salary = attendance salary + overtime - advance
-        var final_paid = attendance_salary + over_time - advanced;
+        // Overtime salary (Rule: 1.5 × hourly rate)
+        var hourly_rate = (basic_salary / total_days) / 10;
+        var overtime_salary = over_time_hours * hourly_rate * 1.5;
+
+        // Final salary
+        var final_paid = attendance_salary + overtime_salary - advanced;
 
         $('#paid').val(final_paid.toFixed(2));
     }
 
-    // Page load হলে employee salary দেখাবে
+    // On page load
     $('#user_id').trigger('change');
 
 });
 </script>
+
 
 @endsection

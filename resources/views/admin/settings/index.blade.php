@@ -22,9 +22,16 @@ Settings Update
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-lg-6 form-group">
-                                    <label for="company_name">Website Name <span class="text-danger">*</span></label>
+                                    <label for="company_name">Company Name <span class="text-danger">*</span></label>
                                     <input value="{{$data->company_name}}" type="text" name="company_name" class="form-control @error('company_name') is-invalid @enderror" id="company_name">
                                     @error('company_name')
+                                    <span class="text-danger">{{$message}}</span>
+                                    @enderror
+                                </div>
+                                <div class="col-lg-6 form-group">
+                                    <label for="company_id">Company ID <span class="text-danger">*</span></label>
+                                    <input value="{{$data->company_id}}" type="text" name="company_id" class="form-control @error('company_id') is-invalid @enderror" id="company_id">
+                                    @error('company_id')
                                     <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
@@ -200,55 +207,53 @@ Settings Update
                                 </div>
 
                                 <div class="col-lg-6 form-group">
-                                    <label for="bank_email">Bank Email</label>
-                                    <input value="{{$data->bank_email}}" type="text" name="bank_email" class="form-control @error('bank_email') is-invalid @enderror" id="bank_email">
-                                    @error('bank_email')
+                                    <label for="acccount_name">Account Name</label>
+                                    <input value="{{$data->acccount_name}}" type="text" name="acccount_name" class="form-control @error('acccount_name') is-invalid @enderror" id="acccount_name">
+                                    @error('acccount_name')
                                     <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
 
                                 <div class="col-lg-6 form-group">
-                                    <label for="bank_phone">Bank Phone</label>
-                                    <input value="{{$data->bank_phone}}" type="text" name="bank_phone" class="form-control @error('bank_phone') is-invalid @enderror" id="bank_phone">
-                                    @error('bank_phone')
+                                    <label for="iban_number">IBAN Number</label>
+                                    <input value="{{$data->iban_number}}" type="text" name="iban_number" class="form-control @error('iban_number') is-invalid @enderror" id="iban_number">
+                                    @error('iban_number')
                                     <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
 
                                 <div class="col-lg-6 form-group">
-                                    <label for="bank_address">Bank Address</label>
-                                    <input value="{{$data->bank_address}}" type="text" name="bank_address" class="form-control @error('bank_address') is-invalid @enderror" id="bank_address">
-                                    @error('bank_address')
+                                    <label for="trn_no">TRN Number</label>
+                                    <input value="{{$data->trn_no}}" type="text" name="trn_no" class="form-control @error('trn_no') is-invalid @enderror" id="trn_no">
+                                    @error('trn_no')
                                     <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
 
                                 <div class="col-lg-6 form-group">
-                                    <label for="established_year">Established Year</label>
-                                    <input value="{{$data->established_year}}" type="text" name="established_year" class="form-control @error('established_year') is-invalid @enderror" id="established_year">
-                                    @error('established_year')
+                                    <label for="vat_no">VAT Number</label>
+                                    <input value="{{$data->vat_no}}" type="text" name="vat_no" class="form-control @error('vat_no') is-invalid @enderror" id="vat_no">
+                                    @error('vat_no')
                                     <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
 
                                 <div class="col-lg-6 form-group">
-                                    <label for="bank_logo">Bank Logo</label>
-                                    <input value="{{$data->bank_logo}}" type="file" name="bank_logo" class=" p-1 form-control @error('bank_logo') is-invalid @enderror" id="bank_logo">
-                                    @error('email_one')
+                                    <label for="terms_condition">Terms Condition Text</label>
+                                    <input value="{{$data->terms_condition}}" type="text" name="terms_condition" class=" p-1 form-control @error('terms_condition') is-invalid @enderror" id="terms_condition">
+                                    @error('terms_condition')
                                     <span class="text-danger">{{$message}}</span>
                                     @enderror
+                                    
+                                </div>
 
-                                    @if($data->bank_logo)
-                                    <div class="mt-2">
-                                        <img id="preview-bank_logo" src="{{ Storage::url($data->bank_logo) }}"
-                                            alt="Current Profile Image" width="120" height="120" style="object-fit: cover; border-radius: 8px;">
-                                    </div>
-                                    @else
-                                    <div class="mt-2">
-                                        <img id="preview-bank_logo" src=""
-                                            alt="Current Profile Image" width="120" height="120" style="object-fit: cover; border-radius: 8px;display:none;">
-                                    </div>
-                                    @endif
+                                <div class="col-lg-6 form-group">
+                                    <label for="terms_description">Terms Condition Description</label>
+                                    <input value="{{$data->terms_description}}" type="text" name="terms_description" class=" p-1 form-control @error('terms_description') is-invalid @enderror" id="terms_description">
+                                    @error('terms_description')
+                                    <span class="text-danger">{{$message}}</span>
+                                    @enderror
+                                    
                                 </div>
 
                                 <!-- <div class="col-lg-12 form-group">

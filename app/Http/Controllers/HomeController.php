@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\ImageHelper;
+use App\Models\Salary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -28,7 +29,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $salary =  Salary::where('user_id', auth()->guard('web')->id())->get();
+        return view('home',compact('salary'));
     }
 
     public function settings()
