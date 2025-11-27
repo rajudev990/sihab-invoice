@@ -30,8 +30,9 @@ class AdminProfileController extends Controller
         $total = $total_paid +  $total_advanced;
 
         $departments = Department::with('users','users.salary')->where('status',1)->get();
+        $setting = Setting::first();
 
-        return view('admin.dashboard',compact('employee','customers','department','total','departments'));
+        return view('admin.dashboard',compact('employee','customers','department','total','departments','setting'));
     }
 
     public function salaryReportPdf()
@@ -50,20 +51,40 @@ class AdminProfileController extends Controller
 
         $setting = Setting::first();
 
-        $logoPath = public_path('storage/' . $setting->header_logo);
-        $banklogo = public_path('storage/' . $setting->bank_logo);
+        return view('admin.reports.department_pdf',compact('departments','grand_total','setting'));
 
-        $pdf = PDF::loadView('admin.reports.salary_pdf', [
-            'departments' => $departments,
-            'grand_total' => $grand_total,
-            'setting'     => $setting,
-            'logoPath'    => $logoPath,
-            'banklogo'    => $banklogo,
-        ]);
-
-        return $pdf->stream('salary-report.pdf');
-        // return $pdf->download('salary-report.pdf');
     }
+
+    // public function salaryReportPdf()
+    // {
+    //     $departments = Department::with('users.salary')->get();
+
+    //     $grand_total = 0;
+
+    //     foreach ($departments as $item) {
+    //         $dept_total = $item->users->sum(function ($u) {
+    //             return $u->salary->sum('paid') + $u->salary->sum('advanced');
+    //         });
+
+    //         $grand_total += $dept_total;
+    //     }
+
+    //     $setting = Setting::first();
+
+    //     $logoPath = public_path('storage/' . $setting->header_logo);
+    //     $banklogo = public_path('storage/' . $setting->bank_logo);
+
+    //     $pdf = PDF::loadView('admin.reports.salary_pdf', [
+    //         'departments' => $departments,
+    //         'grand_total' => $grand_total,
+    //         'setting'     => $setting,
+    //         'logoPath'    => $logoPath,
+    //         'banklogo'    => $banklogo,
+    //     ]);
+
+    //     return $pdf->stream('salary-report.pdf');
+    //     // return $pdf->download('salary-report.pdf');
+    // }
 
     public function settings()
     {

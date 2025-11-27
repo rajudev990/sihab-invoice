@@ -72,8 +72,7 @@ class SettingController extends Controller
         $footer_logo = $request->hasFile('footer_logo') ? ImageHelper::uploadImage($request->file('footer_logo')) : null;
         $favicon = $request->hasFile('favicon') ? ImageHelper::uploadImage($request->file('favicon')) : null;
         $meta_image = $request->hasFile('meta_image') ? ImageHelper::uploadImage($request->file('meta_image')) : null;
-        $bank_logo = $request->hasFile('bank_logo') ? ImageHelper::uploadImage($request->file('bank_logo')) : null;
-
+       
         
         if ($request->hasFile('header_logo') && $data->header_logo) {
             Storage::disk('public')->delete($data->header_logo);
@@ -87,9 +86,7 @@ class SettingController extends Controller
         if ($request->hasFile('meta_image') && $data->meta_image) {
             Storage::disk('public')->delete($data->meta_image);
         }
-        if ($request->hasFile('bank_logo') && $data->bank_logo) {
-            Storage::disk('public')->delete($data->bank_logo);
-        }
+       
         
         $input = $request->all();
         
@@ -110,9 +107,7 @@ class SettingController extends Controller
             $input['meta_image'] = $meta_image;
         }
 
-        if($bank_logo){
-            $input['bank_logo'] = $bank_logo;
-        }
+       
         
         
         $data->update($input);

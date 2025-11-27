@@ -121,6 +121,7 @@ Salary List
                                  
                                
                                     <td class="text-center">
+                                        <a href="{{ route('admin.salary.print', $item->id) }}" class="btn btn-sm btn-primary"><i class="fa fa-print"></i></a>
                                         <a href="{{ route('admin.salary.edit', $item->id) }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
             
                                         <form id="delete-form-{{ $item->id }}" action="{{ route('admin.salary.destroy', $item->id) }}" method="POST" style="display: none;">

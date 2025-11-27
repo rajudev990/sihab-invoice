@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\DepartmentController;
 use App\Http\Controllers\Admin\PositionController;
+use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SalaryController;
 use App\Http\Controllers\Admin\SettingController;
@@ -109,6 +110,17 @@ Route::prefix('admin')
         Route::resource('position', PositionController::class);
         Route::resource('customers', CustomerController::class);
         Route::resource('salary', SalaryController::class);
+
+
+
+        
+        Route::get('salary-print/{id}', [SalaryController::class,'print'])->name('salary.print');
+        Route::get('reports',[ReportController::class,'vat_tax'])->name('reports');
+        Route::post('reports-reports',[ReportController::class,'reportsFilter'])->name('reports-filter');
+        Route::get('reports-print', [ReportController::class, 'print'])->name('reports-print');
+        Route::get('tax-invoice', [ReportController::class, 'taxInvoice'])->name('tax-invoice');
+        Route::get('tax-invoice.create', [ReportController::class, 'taxInvoiceCreate'])->name('tax-invoice.create');
+
         
 
 

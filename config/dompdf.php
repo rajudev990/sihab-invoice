@@ -114,6 +114,7 @@ return [
         'font_dir' => storage_path('fonts/'),
         'font_cache' => storage_path('fonts/'),
         'enable_font_subsetting' => true,
+        'default_font' => 'DejaVu Sans', // Arabic support
 
         /**
          * The PDF rendering backend to use

@@ -12,26 +12,26 @@ Dashboard
         <div class="row mb-2">
             <div class="col-sm-6">
                 <h1 class="m-0">
-                    {{ session('locale', 'en') == 'ar' 
-                            ? \App\Helpers\TranslateHelper::toArabic('Dashboard') 
-                            : 'Dashboard' 
-                            }}
+                    {{ session('locale', 'en') == 'ar'
+                    ? \App\Helpers\TranslateHelper::toArabic('Dashboard')
+                    : 'Dashboard'
+                    }}
                 </h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="{{ route('home') }}">
-                        {{ session('locale', 'en') == 'ar' 
-                            ? \App\Helpers\TranslateHelper::toArabic('Home') 
-                            : 'Home' 
+                            {{ session('locale', 'en') == 'ar'
+                            ? \App\Helpers\TranslateHelper::toArabic('Home')
+                            : 'Home'
                             }}
-                    </a></li>
+                        </a></li>
                     <li class="breadcrumb-item active">
-                        {{ session('locale', 'en') == 'ar' 
-                            ? \App\Helpers\TranslateHelper::toArabic('Dashboard') 
-                            : 'Dashboard' 
-                            }}
-                  </li>
+                        {{ session('locale', 'en') == 'ar'
+                        ? \App\Helpers\TranslateHelper::toArabic('Dashboard')
+                        : 'Dashboard'
+                        }}
+                    </li>
                 </ol>
             </div>
         </div>
@@ -45,61 +45,135 @@ Dashboard
 
         <div class="row">
 
-            <!-- Employ -->
-            <div class="col-lg-3 col-6">
-                <div class="small-box bg-dark">
-                    <div class="inner">
-                        <h3>100</h3>
-                        <p>Department</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fas fa-user-tie"></i>
-                    </div>
-                </div>
-            </div>
+            <div class="col-12 card">
 
-            <!-- Customer -->
-            <div class="col-lg-3 col-6">
-                <div class="small-box bg-info">
-                    <div class="inner">
-                        <h3>100</h3>
-                        <p>Position</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                </div>
-            </div>
+                <div class="card-body">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>
+                                    {{ session('locale', 'en') == 'ar'
+                                    ? \App\Helpers\TranslateHelper::toArabic('#')
+                                    : '#'
+                                    }}
+                                </th>
 
-            <!-- Department -->
-            <div class="col-lg-3 col-6">
-                <div class="small-box bg-success">
-                    <div class="inner">
-                       <h3>2500</h3>
-                        <p>Basic Salary</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fas fa-building"></i>
-                    </div>
-                </div>
-            </div>
+                                <th>
+                                    {{ session('locale', 'en') == 'ar'
+                                    ? \App\Helpers\TranslateHelper::toArabic('Basic Salary')
+                                    : 'Basic Salary'
+                                    }}
+                                </th>
+                                <th>
+                                    {{ session('locale', 'en') == 'ar'
+                                    ? \App\Helpers\TranslateHelper::toArabic('Attendance')
+                                    : 'Attendance'
+                                    }}
+                                </th>
+                                <th>
+                                    {{ session('locale', 'en') == 'ar'
+                                    ? \App\Helpers\TranslateHelper::toArabic('Over Time')
+                                    : 'Over Time'
+                                    }}
+                                </th>
+                                <th>
+                                    {{ session('locale', 'en') == 'ar'
+                                    ? \App\Helpers\TranslateHelper::toArabic('Advanced')
+                                    : 'Advanced'
+                                    }}
+                                </th>
+                                <th>
+                                    {{ session('locale', 'en') == 'ar'
+                                    ? \App\Helpers\TranslateHelper::toArabic('Paid')
+                                    : 'Paid'
+                                    }}
+                                </th>
+                                <th>
+                                    {{ session('locale', 'en') == 'ar'
+                                    ? \App\Helpers\TranslateHelper::toArabic('Salary Date')
+                                    : 'Salary Date'
+                                    }}
+                                </th>
+                                <th>
+                                    {{ session('locale', 'en') == 'ar'
+                                    ? \App\Helpers\TranslateHelper::toArabic('Status')
+                                    : 'Status'
+                                    }}
+                                </th>
+                                <th>
+                                    {{ session('locale', 'en') == 'ar'
+                                    ? \App\Helpers\TranslateHelper::toArabic('Total')
+                                    : 'Total'
+                                    }}
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @php $grand_total = 0; @endphp
+                            @foreach ($salary as $item)
+                            @php
+                            $total = $item->paid + $item->advanced;
+                            $grand_total += $total;
+                            @endphp
+                            <tr>
+                                <td>{{ session('locale') == 'ar' ?
+                                    \App\Helpers\TranslateHelper::toArabic($loop->iteration) : $loop->iteration }}</td>
+                                <td>{{ session('locale') == 'ar' ?
+                                    \App\Helpers\TranslateHelper::toArabic(number_format($item->user->basic_salary,2)) :
+                                    number_format($item->user->basic_salary,2) }}</td>
+                                <td>{{ session('locale') == 'ar' ?
+                                    \App\Helpers\TranslateHelper::toArabic($item->attendance).' (days)' :
+                                    $item->attendance.' (days)' }}</td>
+                                <td>{{ session('locale') == 'ar' ?
+                                    \App\Helpers\TranslateHelper::toArabic(number_format($item->over_time,2)) :
+                                    number_format($item->over_time,2) }}</td>
+                                <td>{{ session('locale') == 'ar' ?
+                                    \App\Helpers\TranslateHelper::toArabic(number_format($item->advanced,2)) :
+                                    number_format($item->advanced,2) }}</td>
+                                <td>{{ session('locale') == 'ar' ?
+                                    \App\Helpers\TranslateHelper::toArabic(number_format($item->paid,2)) :
+                                    number_format($item->paid,2) }}</td>
+                                <td>{{ session('locale') == 'ar' ?
+                                    \App\Helpers\TranslateHelper::toArabic($item->salary_date) : $item->salary_date }}
+                                </td>
+                                <td>
+                                    <span class="badge bg-success">
+                                        {{ session('locale') == 'ar' ? \App\Helpers\TranslateHelper::toArabic('Paid') :
+                                        'Paid' }}
+                                    </span>
+                                </td>
+                                <td>{{ session('locale') == 'ar' ?
+                                    \App\Helpers\TranslateHelper::toArabic(number_format($total,2)) :
+                                    number_format($total,2) }}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
 
-            <!-- Total Payable -->
-            <div class="col-lg-3 col-6">
-                <div class="small-box bg-gradient-indigo">
-                    <div class="inner">
-                        <h3>1</h3>
-                        <p>Level</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fas fa-wallet"></i>
-                    </div>
-                </div>
-            </div>
+                        <tfoot>
+                            <tr>
+                                <th colspan="8" class="text-end">
+                                    {{ session('locale', 'en') == 'ar'
+                                    ? \App\Helpers\TranslateHelper::toArabic('Grand Total')
+                                    : 'Grand Total'
+                                    }}
+                                </th>
+                                <th>
+                                    {{ session('locale') == 'ar'
+                                    ? \App\Helpers\TranslateHelper::toArabic(number_format($grand_total,2))
+                                    : number_format($grand_total,2)
+                                    }}
+                                </th>
+                            </tr>
+                        </tfoot>
 
+                    </table>
+                </div>
+
+
+            </div>
         </div>
 
-       
+
 
     </div>
 </section>

@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Models\Salary;
+use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Http\Request;
+use PDF;
 
 class SalaryController extends Controller
 {
@@ -43,9 +45,22 @@ class SalaryController extends Controller
             'advanced' => 'required|numeric',
             'paid' => 'required|numeric',
             'salary_date' => 'required|date',
+            'month' => 'required',
         ]);
+
+        $last = Salary::orderBy('id', 'desc')->first();
+
+        if ($last) {
+            $last_number = intval(str_replace('INV-', '', $last->invoice_no));
+            $new_number = str_pad($last_number + 1, 4, '0', STR_PAD_LEFT);
+        } else {
+            $new_number = '0001';
+        }
+
+        $invoice_no = 'INV-' . $new_number;
         
         $data = $request->all();
+        $data['invoice_no'] = $invoice_no;
         Salary::create($data);
         return redirect()->route('admin.salary.index')->with('success', 'Data Store Successfully');
     }
@@ -94,6 +109,7 @@ class SalaryController extends Controller
             'advanced' => 'required|numeric',
             'paid' => 'required|numeric',
             'salary_date' => 'required|date',
+            'month' => 'required',
         ]);
 
         $salary = Salary::findOrFail($id);
@@ -105,6 +121,7 @@ class SalaryController extends Controller
         $salary->advanced = $request->advanced;
         $salary->paid = $request->paid;
         $salary->salary_date = $request->salary_date;
+        $salary->month = $request->month;
 
         $salary->save();
 
@@ -120,5 +137,26 @@ class SalaryController extends Controller
         $data = Salary::findOrFail($id);
         $data->delete();
          return redirect()->back()->with('success', 'Data Delete Successfully');
+    }
+
+    public function print($id)
+    {
+
+        $data = Salary::findOrFail($id);
+
+        $setting = Setting::first();
+
+        $logoPath = public_path('storage/' . $setting->header_logo);
+        $banklogo = public_path('storage/' . $setting->bank_logo);
+
+        $pdf = PDF::loadView('admin.reports.customer_pdf', [
+            'setting'     => $setting,
+            'logoPath'    => $logoPath,
+            'banklogo'    => $banklogo,
+            'data'    => $data,
+        ]);
+
+        return $pdf->stream('salary-report.pdf');
+        // return $pdf->download('salary-report.pdf');
     }
 }

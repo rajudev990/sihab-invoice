@@ -70,7 +70,7 @@
         <div class="card">
             <div class="card-body login-card-body">
                 <div class="login-logo">
-                    <a href="{{ url('/') }}"><b>{{ config('app.name') }}</b></a>
+                    <a href="{{ url('/') }}"><b>Ayad Global Consulting</b></a>
                 </div>
 
                 <p class="login-box-msg">Sign in to start your session</p>

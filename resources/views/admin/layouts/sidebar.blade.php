@@ -18,10 +18,7 @@
                     <a href="{{ route('admin.dashboard') }}" class="nav-link {{ Route::is('admin.dashboard') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
-                            {{ session('locale', 'en') == 'ar' 
-                            ? \App\Helpers\TranslateHelper::toArabic('Dashboard') 
-                            : 'Dashboard' 
-                            }}
+                            Dashboard
                         </p>
                     </a>
                 </li>
@@ -29,28 +26,13 @@
 
 
 
-                @can('view setting')
-                <li class="nav-item">
-                    <a href="{{ route('admin.settings.index') }}" class="nav-link {{ Route::is('admin.settings.*') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-cog"></i>
-                        <p>
-                            {{ session('locale', 'en') == 'ar' 
-                            ? \App\Helpers\TranslateHelper::toArabic('Settings') 
-                            : 'Settings' 
-                            }}
-                        </p>
-                    </a>
-                </li>
-                @endcan
+               
 
                 <li class="nav-item">
                     <a href="{{ route('admin.department.index') }}" class="nav-link {{ Route::is('admin.department.*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-building"></i>
                         <p>
-                            {{ session('locale', 'en') == 'ar' 
-                            ? \App\Helpers\TranslateHelper::toArabic('Department') 
-                            : 'Department' 
-                            }}
+                           Department
                         </p>
                     </a>
                 </li>
@@ -59,10 +41,7 @@
                     <a href="{{ route('admin.position.index') }}" class="nav-link {{ Route::is('admin.position.*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-briefcase"></i>
                         <p>
-                            {{ session('locale', 'en') == 'ar' 
-                            ? \App\Helpers\TranslateHelper::toArabic('Position') 
-                            : 'Position' 
-                            }}
+                            Position
                         </p>
                     </a>
                 </li>
@@ -71,10 +50,7 @@
                     <a href="{{ route('admin.staff.index') }}" class="nav-link {{ Route::is('admin.staff.*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
-                            {{ session('locale', 'en') == 'ar' 
-                            ? \App\Helpers\TranslateHelper::toArabic('Employee') 
-                            : 'Employee' 
-                            }}
+                            Employee
                         </p>
                     </a>
                 </li>
@@ -83,10 +59,7 @@
                     <a href="{{ route('admin.customers.index') }}" class="nav-link {{ Route::is('admin.customers.*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-user-friends"></i>
                         <p>
-                            {{ session('locale', 'en') == 'ar' 
-                            ? \App\Helpers\TranslateHelper::toArabic('Customers') 
-                            : 'Customers' 
-                            }}
+                            Customers
                         </p>
                     </a>
                 </li>
@@ -95,13 +68,37 @@
                     <a href="{{ route('admin.salary.index') }}" class="nav-link {{ Route::is('admin.salary.*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-money-bill-wave"></i>
                         <p>
-                            {{ session('locale', 'en') == 'ar' 
-                            ? \App\Helpers\TranslateHelper::toArabic('Salary') 
-                            : 'Salary' 
-                            }}
+                            Salary
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.reports') }}" class="nav-link {{ Route::is('admin.reports') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-print"></i>
+                        <p>
+                            Reports
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.tax-invoice') }}" class="nav-link {{ Route::is('admin.tax-invoice') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-print"></i>
+                        <p>
+                            Tax List
+                        </p>
+                    </a>
+                </li>
+
+                 @can('view setting')
+                <li class="nav-item">
+                    <a href="{{ route('admin.settings.index') }}" class="nav-link {{ Route::is('admin.settings.*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-cog"></i>
+                        <p>
+                            Settings
+                        </p>
+                    </a>
+                </li>
+                @endcan
 
 
 
